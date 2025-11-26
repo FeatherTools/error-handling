@@ -6,9 +6,19 @@
     <OutputType>Library</OutputType>
     <PackageId>Feather.ErrorHandling</PackageId>
     <Version>1.0.0</Version>
-    <RepositoryUrl>https://github.com/FeatherTools/error-handling.git</RepositoryUrl>
+    <Authors>FeatherTools</Authors>
+    <Description>Library for proper error handling with Option, Result, AsyncResult and their computation expressions.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/FeatherTools/error-handling</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/FeatherTools/error-handling.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>fsharp;error-handling;result;option;async;asyncResult;fable</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
