@@ -19,6 +19,52 @@ paket add Feather.ErrorHandling
 
 **Note**: You can also use this library in a Fable project.
 
+## Validation
+
+`validation {}` is applicative. It evaluates every binding joined with `and!` and collects all of their failures.
+You can bind a `Result<'T, 'Failure>` or a `Validation<'T, 'Failure>` directly.
+
+```fs
+open Feather.ErrorHandling
+
+type Person = { Name: string; Age: int }
+
+type PersonError =
+    | NameEmpty
+    | InvalidAge
+    | AgeNegative
+    | Underage
+
+module Int32 =
+    let tryParse (s: string) =
+        match System.Int32.TryParse(s) with
+        | true, value -> Some value
+        | false, _ -> None
+
+let validateName name = if name = "" then Error NameEmpty else Ok name
+
+let createPerson name age: Validation<Person, PersonError> = validation {
+    let! name = validateName name
+    and! age = result {  // only one specific error may come from the result
+        let! age = age |> Int32.tryParse |> Result.ofOption InvalidAge
+        if age < 0 then return! Error AgeNegative
+        if age < 18 then return! Error Underage
+
+        return age
+    }
+
+    return { Name = name; Age = age }
+}
+
+createPerson "Alice" "30"     // Ok { Name = "Alice"; Age = 30 }
+createPerson "Alice" "thirty" // Error [ InvalidAge ]
+createPerson "" "-1"          // Error [ NameEmpty; AgeNegative ]
+createPerson "Alice" "16"     // Error [ Underage ]
+```
+
+A `Validation<'T, 'Failure>` is a `Result<'T, 'Failure list>`, so when a stage should run only if the previous one
+succeeded, bind the stages in an outer `result {}`.
+
 ## Release
 1. Increment version in `ErrorHandling.fsproj`
 2. Update `CHANGELOG.md`
