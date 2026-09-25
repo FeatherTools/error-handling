@@ -31,8 +31,8 @@ module Option =
         | x -> Some (unbox x) // anything else
 
     let toNullable: 'a option -> Nullable<'a> = function
-        | Some item -> new Nullable<_>(item)
-        | None -> new Nullable<_>()
+        | Some item -> Nullable<_>(item)
+        | None -> Nullable<_>()
 
     let orDefault (x: unit -> 'a): 'a option -> 'a = function
         | None -> x ()
@@ -111,7 +111,7 @@ module OptionComputationExpression =
                 | disp -> disp.Dispose())
 
         member this.For(sequence: seq<_>, body) =
-            this.Using(sequence.GetEnumerator(),fun enum ->
+            this.Using(sequence.GetEnumerator(), fun enum ->
                 this.While(enum.MoveNext,
                     this.Delay(fun () -> body enum.Current)))
 

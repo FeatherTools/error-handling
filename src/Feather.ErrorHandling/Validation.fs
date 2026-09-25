@@ -26,6 +26,10 @@ module Validation =
         // to the initial value
         List.foldBack consR validations initialValue
 
+    /// Combine two Validations into a tuple, accumulating failures
+    let zip (xV: Validation<'SuccessA, 'Failure>) (yV: Validation<'SuccessB, 'Failure>): Validation<'SuccessA * 'SuccessB, 'Failure> =
+        apply (Result.map (fun x y -> x, y) xV) yV
+
     //-----------------------------------
     // Converting between Validations and other types
 
@@ -39,3 +43,35 @@ module Validation =
 
     let toResult (xV: Validation<'Success, 'Failure>): Result<'Success, 'Failure list> =
         xV
+
+[<AutoOpen>]
+module ValidationComputationExpression =
+
+    /// Applicative only: `let! ... and! ...` accumulates failures. Sequential `let!` does not
+    /// compile; sequence validation stages monadically through an outer `result {}`
+    /// (Validation is a Result).
+    type ValidationBuilder() =
+        member __.Return (value: 'Success): Validation<'Success, 'Failure> =
+            Ok value
+
+        member __.ReturnFrom (validation: Validation<'Success, 'Failure>): Validation<'Success, 'Failure> =
+            validation
+
+        member __.BindReturn (validation: Validation<'SuccessA, 'Failure>, (f: 'SuccessA -> 'SuccessB)): Validation<'SuccessB, 'Failure> =
+            Result.map f validation
+
+        member __.MergeSources (xV: Validation<'SuccessA, 'Failure>, yV: Validation<'SuccessB, 'Failure>): Validation<'SuccessA * 'SuccessB, 'Failure> =
+            Validation.zip xV yV
+
+        member __.Source (validation: Validation<'Success, 'Failure>): Validation<'Success, 'Failure> =
+            validation
+
+    let validation = ValidationBuilder()
+
+[<AutoOpen>]
+module ValidationComputationExpressionExtensions =
+
+    type ValidationBuilder with
+        // Overload for `Result` as an extension member, so that the one for `Validation` has a higher precedence
+        member __.Source (result: Result<'Success, 'Failure>): Validation<'Success, 'Failure> =
+            Validation.ofResult result
