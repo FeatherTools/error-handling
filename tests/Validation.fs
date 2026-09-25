@@ -88,12 +88,12 @@ let validationTest =
         testCase "should evaluate later bindings after a failure with applicative sequencing (and!)" <| fun _ ->
             let mutable secondEvaluated = false
 
-            let _: Validation<string * int, PersonValidationError> = validation {
+            validation {
                 let! name = Validation.ofResult (Error NameEmpty)
                 and! age = Ok (secondEvaluated <- true; 42)
 
                 return name, age
-            }
+            } |> ignore<Validation<string * int, PersonValidationError>>
 
             Expect.isTrue secondEvaluated "Should evaluate the Ok binding despite the preceding failure"
 
@@ -144,7 +144,7 @@ let validationTest =
             }
 
             Expect.equal actual (Ok 42) "Should pass the Validation through"
-    
+
         testCase "should bind a Result by lifting its failure into the Validation" <| fun _ ->
             let actual: Validation<string * int * string, PersonValidationError> = validation {
                 let! name = Error NameEmpty

@@ -139,12 +139,12 @@ module AsyncResult =
         x |> ofEmptyTask |> catch f
 
     /// Lift an Option into an AsyncResult
-    let ofOption (onMissing: 'Error): Option<'Success> -> AsyncResult<'Success, 'Error> = function
+    let ofOption (onMissing: 'Error): 'Success option -> AsyncResult<'Success, 'Error> = function
         | Some v -> ofSuccess v
         | _ -> ofError onMissing
 
     /// Lift an async Option into an AsyncResult
-    let ofAsyncOption (onMissing: 'Error) (aO: Async<Option<'Success>>): AsyncResult<'Success, 'Error> =
+    let ofAsyncOption (onMissing: 'Error) (aO: Async<'Success option>): AsyncResult<'Success, 'Error> =
         aO |> ofAsyncCatch (fun _ -> onMissing) |> bind (ofOption onMissing)
 
     let ofBool (onFalse: 'Error) (b: bool): AsyncResult<unit, 'Error> =
@@ -355,6 +355,7 @@ module AsyncResultExtension =
 
         type private MaxAttempts = MaxAttempts of int
 
+        [<TailCall>]
         let rec private retryBy log policy (MaxAttempts maxAttempts) attemptsLeft (xA: AsyncResult<'a, 'b>): AsyncResult<'a, 'b> =
             if attemptsLeft > 0 then
                 async {
