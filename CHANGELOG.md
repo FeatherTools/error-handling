@@ -2,6 +2,8 @@
 
 <!-- There is always Unreleased section on the top. Subsections (Add, Changed, Fix, Removed) should be Add as needed. -->
 ## Unreleased
+
+## 2.1.0 - 2026-09-25
 - Add `validation {}` computation expression, accumulating failures of `let! ... and! ...` bindings of both `Validation` and `Result`
 - Add `Validation.zip`
 
