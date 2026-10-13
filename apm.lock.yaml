@@ -1,0 +1,113 @@
+lockfile_version: '1'
+dependencies: []
+deployments:
+- kind: project-relative
+  target: claude
+  value: .claude/skills/feather-error-handling
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/feather-error-handling/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:db0b8335114cc823eedc7c81b65b1864183a9bb553b576dbb730c6d299e8a6e8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/feather-error-handling/references/anti-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:fd30b8d7abbf265fecd361919ccdcf323198a7c2f914e6b382a7999b47f3bd06
+- kind: project-relative
+  target: claude
+  value: .claude/skills/feather-error-handling/references/examples.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:6febe30cfacd2feb14445457b563c274ef98a2619e3256bbf09f350c1833a7fe
+- kind: project-relative
+  target: claude
+  value: .claude/skills/feather-error-handling/references/preferred-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:ff773b24794d451a950a58ca60843ff48da5bea478128de563767144664bde3d
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/feather-error-handling
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/feather-error-handling/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:db0b8335114cc823eedc7c81b65b1864183a9bb553b576dbb730c6d299e8a6e8
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/feather-error-handling/references/anti-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:fd30b8d7abbf265fecd361919ccdcf323198a7c2f914e6b382a7999b47f3bd06
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/feather-error-handling/references/examples.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:6febe30cfacd2feb14445457b563c274ef98a2619e3256bbf09f350c1833a7fe
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/feather-error-handling/references/preferred-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:ff773b24794d451a950a58ca60843ff48da5bea478128de563767144664bde3d
+local_deployed_files:
+- .agents/skills/feather-error-handling
+- .agents/skills/feather-error-handling/SKILL.md
+- .agents/skills/feather-error-handling/references/anti-patterns.md
+- .agents/skills/feather-error-handling/references/examples.md
+- .agents/skills/feather-error-handling/references/preferred-patterns.md
+- .claude/skills/feather-error-handling
+- .claude/skills/feather-error-handling/SKILL.md
+- .claude/skills/feather-error-handling/references/anti-patterns.md
+- .claude/skills/feather-error-handling/references/examples.md
+- .claude/skills/feather-error-handling/references/preferred-patterns.md
+local_deployed_file_hashes:
+  .agents/skills/feather-error-handling/SKILL.md: sha256:db0b8335114cc823eedc7c81b65b1864183a9bb553b576dbb730c6d299e8a6e8
+  .agents/skills/feather-error-handling/references/anti-patterns.md: sha256:fd30b8d7abbf265fecd361919ccdcf323198a7c2f914e6b382a7999b47f3bd06
+  .agents/skills/feather-error-handling/references/examples.md: sha256:6febe30cfacd2feb14445457b563c274ef98a2619e3256bbf09f350c1833a7fe
+  .agents/skills/feather-error-handling/references/preferred-patterns.md: sha256:ff773b24794d451a950a58ca60843ff48da5bea478128de563767144664bde3d
+  .claude/skills/feather-error-handling/SKILL.md: sha256:db0b8335114cc823eedc7c81b65b1864183a9bb553b576dbb730c6d299e8a6e8
+  .claude/skills/feather-error-handling/references/anti-patterns.md: sha256:fd30b8d7abbf265fecd361919ccdcf323198a7c2f914e6b382a7999b47f3bd06
+  .claude/skills/feather-error-handling/references/examples.md: sha256:6febe30cfacd2feb14445457b563c274ef98a2619e3256bbf09f350c1833a7fe
+  .claude/skills/feather-error-handling/references/preferred-patterns.md: sha256:ff773b24794d451a950a58ca60843ff48da5bea478128de563767144664bde3d
