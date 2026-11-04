@@ -1,5 +1,7 @@
 namespace Feather.ErrorHandling
 
+open System
+
 /// Functions for Result type (functor and monad).
 /// For applicative, see Validation.
 [<RequireQualifiedAccess>]
@@ -67,6 +69,18 @@ module Result =
         |> sequence
         |> Result.map List.concat
 
+    /// Convert a Result option to Result of Option
+    let sequenceOption: Result<'Success, 'Error> option -> Result<'Success option, 'Error> = function
+        | Some (Ok success) -> Ok (Some success)
+        | Some (Error error) -> Error error
+        | None -> Ok None
+
+    /// Traverse an option with a function that returns a Result, converting it to a Result of Option
+    let traverseOption (f: 'a -> Result<'Success, 'Error>) (opt: 'a option): Result<'Success option, 'Error> =
+        opt
+        |> Option.map f
+        |> sequenceOption
+
     /// select all success results
     let list (results: Result<'Success, 'Error> list): 'Success list =
         results
@@ -83,11 +97,8 @@ module Result =
             | _ -> []
         )
 
-    /// Convert a Result option to Result of Option
-    let option: Result<'Success, 'Error> option -> Result<'Success option, 'Error> = function
-        | Some (Ok success) -> Ok (Some success)
-        | Some (Error error) -> Error error
-        | None -> Ok None
+    [<Obsolete("Result.option is deprecated, use Result.sequenceOption instead.")>]
+    let option = sequenceOption
 
     /// return a success or fail with exception
     let orFail = function

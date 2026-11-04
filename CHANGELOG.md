@@ -2,6 +2,8 @@
 
 <!-- There is always Unreleased section on the top. Subsections (Add, Changed, Fix, Removed) should be Add as needed. -->
 ## Unreleased
+- Deprecate `Result.option`, add `Result.sequenceOption` as its replacement
+- Add `Result.traverseOption`
 
 ## 2.2.0 - 2026-10-23
 - Generate documentation
